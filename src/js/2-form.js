@@ -1,37 +1,41 @@
-'use strict';
+/* const throttle = require('lodash.throttle'); */
 
-const feedbackForm = document.querySelector('.feedback-form');
+const formEl = document.querySelector('.feedback-form');
+const inputEl = document.querySelector('input');
+const messageEl = document.querySelector('textarea');
+const buttonEl = document.querySelector('button');
 
-const localStorageKey = 'feedback-form-state';
+const localStoregaData = localStorage.getItem('feedback-form-state');
+const parsedData = JSON.parse(localStoregaData);
 
-const input = feedbackForm.elements.email;
-const textarea = feedbackForm.elements.message;
+if (parsedData !== null) {
+  if (parsedData.email !== '') inputEl.value = parsedData.email;
+  if (parsedData.message !== '') messageEl.value = parsedData.messege;
+}
+formEl.addEventListener('input', onInput);
+formEl.addEventListener('submit', onPress);
 
-const savedState = localStorage.getItem(localStorageKey);
-
-if (savedState ?? '') {
-  const parsedState = JSON.parse(savedState);
-  input.value = parsedState.email;
-  textarea.value = parsedState.message;
+function onInput(evt) {
+  const emailValue = inputEl.value.trim();
+  const messegeValue = messageEl.value.trim();
+  const inputArr = {
+    email: `${emailValue}`,
+    messege: `${messegeValue}`,
+  };
+  localStorage.setItem('feedback-form-state', JSON.stringify(inputArr));
 }
 
-feedbackForm.addEventListener('input', () => {
-  const feedback = {
-    email: input.value.trim(),
-    message: textarea.value.trim(),
-  };
+function onPress(evt) {
+  evt.preventDefault();
+  if (inputEl.value !== '' && messageEl.value !== '') {
+    const getArr = localStorage.getItem('feedback-form-state');
+    const parsedArr = JSON.parse(getArr);
+    console.log(parsedArr);
 
-  localStorage.setItem(localStorageKey, JSON.stringify(feedback));
-});
-
-feedbackForm.addEventListener('submit', e => {
-  e.preventDefault();
-
-  if (input.value === '' || textarea.value === '') {
-    alert('You need to write a message!');
-    return;
+    localStorage.removeItem('feedback-form-state');
+    formEl.reset();
+  } else {
+    const message = 'Будь ласка, заповніть всі поля форми.';
+    alert(message);
   }
-
-  localStorage.removeItem(localStorageKey);
-  feedbackForm.reset();
-});
+}

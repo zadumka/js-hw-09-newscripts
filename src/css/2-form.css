@@ -1,73 +1,70 @@
 .feedback-form {
   display: flex;
   flex-direction: column;
-
-  width: 408px;
+  max-width: 408px;
+  max-height: 296px;
   padding: 24px;
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: 8px;
-  margin: 0 auto;
-  background: #fff;
+  box-shadow: 0 10px 10px 0 #cccccc;
 }
-
-label {
+.feedback-form label {
   display: flex;
   flex-direction: column;
-  row-gap: 8px;
+  margin-bottom: 16px;
+  border-radius: 4px;
 }
+ span {
+  font-family: 'Montserrat', Regular;
+  font-size: 16px;
+} 
 
 input,
 textarea {
-  padding-left: 16px;
-  margin-bottom: 16px;
-  outline: transparent;
-  border: 1px solid #808080;
-  border-radius: 4px;
-
-  color: #2e2f42;
-  font-family: inherit;
+  font-family: 'Montserrat', Regular;
   font-size: 16px;
   line-height: 1.5;
-  letter-spacing: 0.04em;
-
-  transition: border-color 250ms ease-out;
+  padding: 10px;
+  margin-top: 8px;
+  border-radius: 6px;
+  border-color: #808080;
+  width: 100%;
+}
+input {
+  height:40px ;
+}
+textarea {
+    height: 80px;
+}
+input:hover,
+input:focus {
+  border-color: #000000;
+}
+input:active {
+  border-color: #808080;
+  color: #2e2f42;
 }
 
 textarea {
-  height: 80px;
-  padding-top: 8px;
+  resize: none;
 }
 
-input {
-  height: 40px;
-  margin-bottom: 8px;
-}
-
-input:hover,
-textarea:hover,
-input:focus,
-textarea:focus {
-  border-color: #000;
-}
-
-button[type='submit'] {
-  max-width: 95px;
-
-  color: #fff;
+button {
+  font-family: 'Montserrat', Medium;
   font-size: 16px;
-  font-weight: 500;
+  background-color: #4e75ff;
   line-height: 1.5;
-  letter-spacing: 0.04em;
-
-  padding: 8px 16px;
-  border: transparent;
+  width: 95px;
+  height: 40px;
+  color: white;
+  border: none;
   border-radius: 8px;
-  outline: transparent;
-  background: #4e75ff;
-
-  transition: background-color 250ms ease-out;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: color 250ms linear, border-color 250ms linear;
 }
-
-button[type='submit']:hover,
-button[type='submit']:focus {
+button:hover,
+button:focus {
   background-color: #6c8cff;
 }
